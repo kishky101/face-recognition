@@ -1,0 +1,29 @@
+#root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  background: linear-gradient(89deg, #ff62ff 0%, #04c8de 100%);
+  z-index: -5;
+} */
+
+.App {
+  height: 100%;
+  z-index: -3;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.particles-bg-canvas-self {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+}
