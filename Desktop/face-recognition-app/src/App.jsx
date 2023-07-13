@@ -9,25 +9,26 @@ import SignIn from './components/sign-in/sign-in';
 import Register from './components/register/register';
 import './App.css'
 
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    password: '',
+    entries: 0,
+    joined: ''
+  }
+}
 
 class App extends Component {
   constructor() {
     super()
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        password: '',
-        entries: 0,
-        joined: ''
-      }
-    }
+    this.state = initialState;
   }
 
 
@@ -112,7 +113,7 @@ class App extends Component {
         }).then(response => response.json())
         .then(data => {
             this.setState({user: {...this.state.user, entries: data}})
-        })
+        }).catch(console.log)
         }
         return this.displayFaceBox(this.faceDetection(result_1));
       } catch (error) {
@@ -125,7 +126,7 @@ class App extends Component {
     if (route === 'home') {
       this.setState({isSignedIn: true})
     }else {
-      this.setState({isSignedIn: false})
+      this.setState(initialState)
     } 
     this.setState({route})
   }
