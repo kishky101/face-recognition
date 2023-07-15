@@ -36,11 +36,11 @@ const clarifiFunc = (imageUrl) => {
    try {
           const data = await fetch("https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs", clarifiFunc(req.body.imageUrl));
           const response = await data.json();
-          console.log(response);
+          //console.log(response);
           return res.json(response);
       } catch (err) {
-        const error = await err.json();
-        return res.status(400).json(error);
+        //const error = await err.json();
+        return res.status(400).json('problem with api call');
       }
   }
 
