@@ -38,7 +38,8 @@ const clarifiFunc = (imageUrl) => {
           const response = await data.json();
           return res.json(response);
       } catch (err) {
-          return res.status(400).json('problem with api call');
+        
+          return res.status(400).json(err);
       }
   }
 

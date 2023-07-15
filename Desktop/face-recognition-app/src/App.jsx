@@ -126,7 +126,7 @@ class App extends Component {
 
         const result_1 = await response.json();
 
-        if (result_1) {
+        if (result_1.status) {
           fetch('https://face-recognition-api-xts6.onrender.com/image', {
             method: 'PUT',
             headers: {
