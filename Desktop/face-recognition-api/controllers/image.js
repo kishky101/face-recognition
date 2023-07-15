@@ -32,7 +32,7 @@ const clarifiFunc = (imageUrl) => {
     };
   }
 
-  const handleApiCall = async (req, res) => {
+  const handleApiCall = async (req, res, fetch) => {
    try {
           const data = await fetch("https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs", clarifiFunc(req.body.imageUrl));
           const response = await data.json();
