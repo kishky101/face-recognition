@@ -32,27 +32,16 @@ const clarifiFunc = (imageUrl) => {
     };
   }
 
-//   const handleApiCall = async (req, res) => {
-//    try {
-//           const data = await fetch("https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs", clarifiFunc(req.body.imageUrl));
-//           const response = await data.json();
-//           //console.log(response);
-//           return res.json(response);
-//       } catch (err) {
-//         console.log(err)
-//         return res.status(400).json('problem with api call');
-//       }
-//   }
-  const handleApiCall = (req, res) => {
-   
-         fetch("https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs", clarifiFunc(req.body.imageUrl)).then(data => data.json()).then(data => res.json(data)).catch(err => res.json('problem with api call'));
-    //       const response = await data.json();
-    //       //console.log(response);
-    //       return res.json(response);
-    //   } catch (err) {
-    //     console.log(err)
-    //     return res.status(400).json('problem with api call');
-    //   }
+  const handleApiCall = async (req, res) => {
+   try {
+          const data = await fetch("https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs", clarifiFunc(req.body.imageUrl));
+          const response = await data.json();
+          //console.log(response);
+          return res.json(response);
+      } catch (err) {
+        console.log(err)
+        return res.status(400).json('problem with api call');
+      }
   }
 
 
