@@ -34,7 +34,7 @@ const clarifiFunc = (imageUrl) => {
 
   const handleApiCall = async (req, res) => {
    try {
-          const data = await fetch("https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs", clarifiFunc('https://media.istockphoto.com/id/1329622588/photo/portrait-beautiful-young-woman-with-clean-fresh-skin.jpg?s=612x612&w=0&k=20&c=9AoxkXBKOdFrqddZt3_R9S0FpDFpFuPS9hGgQjoeNCo='));
+          const data = await fetch("https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs", clarifiFunc(req.body.imageUrl));
           const response = await data.json();
           //console.log(response);
           return res.json(response);
