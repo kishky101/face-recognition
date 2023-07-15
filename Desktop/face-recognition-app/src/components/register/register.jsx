@@ -6,7 +6,8 @@ class Register extends React.Component {
         this.state = {
             signUpName: '',
             signUpEmail: '',
-            signUpPassword: ''
+            signUpPassword: '',
+            error: ''
         }
     }
 
@@ -23,6 +24,9 @@ class Register extends React.Component {
     }
 
     onSubmitHandler = () => {
+        if(!this.state.signUpName || !this.state.signUpEmail || !this.state.signUpPassword) {
+            return this.setState({error: '* All fields are required'})
+        }
         fetch('http://localhost:3000/register', {
             method: 'POST',
             headers: {
@@ -80,6 +84,7 @@ class Register extends React.Component {
                                 />
                             </div>
                         </fieldset>
+                        {this.state.error && <span className="dark-red">{this.state.error}</span>}
                         <div className="">
                         <input onClick={this.onSubmitHandler} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register" />
                         </div>

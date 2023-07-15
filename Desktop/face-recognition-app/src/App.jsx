@@ -57,38 +57,53 @@ class App extends Component {
   }
 
 
-  clarifiFunc = (imageUrl) => {
-    const PAT = '86eb428e996e4529893918b9c66b94e6';
-    const USER_ID = 'kishky';       
-    const APP_ID = 'face-recognition';
-    const MODEL_ID = 'face-detection';  
-    const IMAGE_URL = imageUrl;
+  // clarifiFunc = (imageUrl) => {
+  //   const PAT = '86eb428e996e4529893918b9c66b94e6';
+  //   const USER_ID = 'kishky';       
+  //   const APP_ID = 'face-recognition';
+  //   const MODEL_ID = 'face-detection';  
+  //   const IMAGE_URL = imageUrl;
   
-    const raw = JSON.stringify({
-        "user_app_id": {
-            "user_id": USER_ID,
-            "app_id": APP_ID
-        },
-        "inputs": [
-            {
-                "data": {
-                    "image": {
-                        "url": IMAGE_URL
-                    }
-                }
-            }
-        ]
-    });
+  //   const raw = JSON.stringify({
+  //       "user_app_id": {
+  //           "user_id": USER_ID,
+  //           "app_id": APP_ID
+  //       },
+  //       "inputs": [
+  //           {
+  //               "data": {
+  //                   "image": {
+  //                       "url": IMAGE_URL
+  //                   }
+  //               }
+  //           }
+  //       ]
+  //   });
 
-    return {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Key ' + PAT
-        },
-        body: raw
-    };
-  }
+  //   return {
+  //       method: 'POST',
+  //       headers: {
+  //           'Accept': 'application/json',
+  //           'Authorization': 'Key ' + PAT
+  //       },
+  //       body: raw
+  //   };
+  // }
+
+  // imageApiCall = async () => {
+  //   const data = await fetch('/imageurl', {
+  //     method: 'POST',
+  //     headers: {
+  //         'content-type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       id: this.state.imageUrl
+  //     })
+  //   })
+
+  //   return data;
+
+  // }
 
 
   onInputChange = (event) => {
@@ -99,8 +114,18 @@ class App extends Component {
   onSubmitButton = async () => {
     this.setState({imageUrl: this.state.input}, async () => {
       try {
-        const response = await fetch("https://api.clarifai.com/v2/models/" + "face-detection" + "/outputs", this.clarifiFunc(this.state.imageUrl));
+        const response = await fetch('http://localhost:3000/imageurl', {
+          method: 'POST',
+          headers: {
+              'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            imageUrl: this.state.imageUrl
+          })
+        });
+
         const result_1 = await response.json();
+
         if (result_1) {
           fetch('http://localhost:3000/image', {
             method: 'PUT',
