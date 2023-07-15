@@ -114,7 +114,7 @@ class App extends Component {
   onSubmitButton = async () => {
     this.setState({imageUrl: this.state.input}, async () => {
       try {
-        const response = await fetch('http://localhost:3000/imageurl', {
+        const response = await fetch('https://face-recognition-api-xts6.onrender.com/imageurl', {
           method: 'POST',
           headers: {
               'content-type': 'application/json'
@@ -127,7 +127,7 @@ class App extends Component {
         const result_1 = await response.json();
 
         if (result_1) {
-          fetch('http://localhost:3000/image', {
+          fetch('https://face-recognition-api-xts6.onrender.com/image', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

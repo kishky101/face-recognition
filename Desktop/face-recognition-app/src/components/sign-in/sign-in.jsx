@@ -22,7 +22,7 @@ class SignIn extends React.Component {
         if(!this.state.signInEmail || !this.state.signInPassword) {
             return this.setState({error: '* All fields are required'})
         }
-        fetch('http://localhost:3000/signin', {
+        fetch('https://face-recognition-api-xts6.onrender.com/signin', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

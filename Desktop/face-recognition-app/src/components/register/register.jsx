@@ -27,7 +27,7 @@ class Register extends React.Component {
         if(!this.state.signUpName || !this.state.signUpEmail || !this.state.signUpPassword) {
             return this.setState({error: '* All fields are required'})
         }
-        fetch('http://localhost:3000/register', {
+        fetch('https://face-recognition-api-xts6.onrender.com/register', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
