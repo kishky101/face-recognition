@@ -15,6 +15,7 @@ const initialState = {
   box: {},
   route: 'signin',
   isSignedIn: false,
+  isImageUrl: false,
   user: {
     id: '',
     name: '',
@@ -114,33 +115,40 @@ class App extends Component {
   onSubmitButton = async () => {
     this.setState({imageUrl: this.state.input}, async () => {
       try {
-        const response = await fetch('https://face-recognition-api-xts6.onrender.com/imageurl', {
-          method: 'POST',
-          headers: {
-              'content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            imageUrl: this.state.imageUrl
-          })
-        });
+        if(this.state.imageUrl) {
+          this.setState({isImageUrl: false})
 
-        const result_1 = await response.json();
-
-        if (result_1.status) {
-          fetch('https://face-recognition-api-xts6.onrender.com/image', {
-            method: 'PUT',
+          const response = await fetch('https://face-recognition-api-xts6.onrender.com/imageurl', {
+            method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify({
-              id: this.state.user.id
+              imageUrl: this.state.imageUrl
             })
-        }).then(response => response.json())
-        .then(data => {
-            this.setState({user: {...this.state.user, entries: data}})
-        }).catch(console.log)
+          });
+
+          const result_1 = await response.json();
+          console.log(result_1)
+
+          if (result_1.status) {
+            fetch('https://face-recognition-api-xts6.onrender.com/image', {
+              method: 'PUT',
+              headers: {
+                  'content-type': 'application/json'
+              },
+              body: JSON.stringify({
+                id: this.state.user.id
+              })
+            }).then(response => response.json())
+            .then(data => {
+                this.setState({user: {...this.state.user, entries: data}})
+            }).catch(console.log)
+          }
+          return this.displayFaceBox(this.faceDetection(result_1));
+        }else {
+          return this.setState({isImageUrl: true})
         }
-        return this.displayFaceBox(this.faceDetection(result_1));
       } catch (error) {
         return console.log('error', error);
       }
@@ -169,6 +177,7 @@ class App extends Component {
           <ImageLinkForm 
             onInputChange = {this.onInputChange} 
             onSubmitButton = {this.onSubmitButton} 
+            isImageUrl={this.state.isImageUrl}
           />
           <FaceRecognition imageUrl = {this.state.imageUrl} box = {this.state.box} />
         </div> : 

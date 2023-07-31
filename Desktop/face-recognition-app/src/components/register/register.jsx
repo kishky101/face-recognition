@@ -88,6 +88,9 @@ class Register extends React.Component {
                         <div className="">
                         <input onClick={this.onSubmitHandler} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register" />
                         </div>
+                        <div className="lh-copy mt3">
+                            <p onClick={() => onRouteChange('signin')} className="f6 link dim black pointer db">Already have an account? <span className="underline">Sign in</span></p>
+                        </div>
                     </div>
                 </main>
             </article>
